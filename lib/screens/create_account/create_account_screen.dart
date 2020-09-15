@@ -4,7 +4,7 @@ import 'package:boti_challenge/custom_widgets/go_to_login_button.dart';
 import 'package:boti_challenge/custom_widgets/name_field.dart';
 import 'package:boti_challenge/custom_widgets/password_field.dart';
 import 'package:boti_challenge/extra/custom_login_background_painter.dart';
-import 'package:boti_challenge/screens/main_tab_screen/main_tab_screen.dart';
+import 'package:boti_challenge/screens/main_tab/main_tab_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';

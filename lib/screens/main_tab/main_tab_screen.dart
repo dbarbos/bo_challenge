@@ -1,5 +1,5 @@
 import 'dart:async';
-import 'package:boti_challenge/screens/home_screen.dart/home_screen.dart';
+import 'package:boti_challenge/screens/home/home_screen.dart';
 import 'package:flutter/material.dart';
 
 class MainTabScreen extends StatefulWidget {

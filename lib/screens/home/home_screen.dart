@@ -1,11 +1,12 @@
 import 'package:boti_challenge/models/news_item.dart';
-import 'package:boti_challenge/screens/home_screen.dart/stores/newsstore.dart';
-import 'package:boti_challenge/screens/news_detail_screen/news_detail_screen.dart';
+import 'package:boti_challenge/screens/news_detail/news_detail_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:intl/intl.dart';
 import 'package:mobx/mobx.dart';
+
+import 'stores/newsstore.dart';
 
 class HomeScreen extends StatefulWidget {
   @override
