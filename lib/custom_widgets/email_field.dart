@@ -5,13 +5,15 @@ class EmailField extends StatelessWidget {
   final Function(String) onChanged;
   final bool isEmailValid;
   final bool isEnabled;
+  final FocusNode focusNode;
 
   const EmailField(
       {Key key,
       this.onSubmitted,
       this.onChanged,
       @required this.isEmailValid,
-      @required this.isEnabled})
+      @required this.isEnabled,
+      this.focusNode})
       : super(key: key);
 
   @override
@@ -45,6 +47,7 @@ class EmailField extends StatelessWidget {
               textInputAction: TextInputAction.next,
               keyboardType: TextInputType.emailAddress,
               autocorrect: false,
+              focusNode: focusNode,
               enabled: isEnabled,
               onSubmitted: (value) {
                 onSubmitted(context);

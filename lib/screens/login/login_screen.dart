@@ -1,15 +1,15 @@
 import 'package:adaptive_dialog/adaptive_dialog.dart';
-import 'package:boti_challenge/screens/login/custom_widgets/go_to_create_account_button.dart';
-import 'package:boti_challenge/screens/login/extra/custom_login_background_painter.dart';
+import 'package:boti_challenge/custom_widgets/email_field.dart';
+import 'package:boti_challenge/custom_widgets/go_to_create_account_button.dart';
+import 'package:boti_challenge/custom_widgets/login_button.dart';
+import 'package:boti_challenge/custom_widgets/password_field.dart';
+import 'package:boti_challenge/extra/custom_login_background_painter.dart';
 import 'package:boti_challenge/screens/main_tab_screen/main_tab_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:mobx/mobx.dart';
 
-import 'custom_widgets/email_field.dart';
-import 'custom_widgets/login_button.dart';
-import 'custom_widgets/password_field.dart';
 import 'stores/loginstore.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -88,7 +88,6 @@ class _LoginScreenState extends State<LoginScreen> {
                       Observer(builder: (_) {
                         return PasswordField(
                           focusNode: loginStore.passwordFocus,
-                          onSubmitted: (value) => print(value),
                           onChanged: loginStore.changePassword,
                           isPasswordValid: loginStore.isPasswordValid,
                           changePasswordVisibility:
