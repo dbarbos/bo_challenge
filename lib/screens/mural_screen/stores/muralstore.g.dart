@@ -12,13 +12,13 @@ mixin _$MuralStore on _MuralStoreBase, Store {
   final _$postListAtom = Atom(name: '_MuralStoreBase.postList');
 
   @override
-  ObservableList<Post> get postList {
+  ObservableList<PostStore> get postList {
     _$postListAtom.reportRead();
     return super.postList;
   }
 
   @override
-  set postList(ObservableList<Post> value) {
+  set postList(ObservableList<PostStore> value) {
     _$postListAtom.reportWrite(value, super.postList, () {
       super.postList = value;
     });
@@ -28,7 +28,7 @@ mixin _$MuralStore on _MuralStoreBase, Store {
       ActionController(name: '_MuralStoreBase');
 
   @override
-  void addPost(Post newPost) {
+  void addPost(PostStore newPost) {
     final _$actionInfo = _$_MuralStoreBaseActionController.startAction(
         name: '_MuralStoreBase.addPost');
     try {

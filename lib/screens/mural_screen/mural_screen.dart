@@ -1,10 +1,11 @@
-import 'package:boti_challenge/models/post.dart';
-import 'package:boti_challenge/models/user.dart';
+import 'package:adaptive_dialog/adaptive_dialog.dart';
 import 'package:boti_challenge/screens/mural_screen/stores/muralstore.dart';
+import 'package:boti_challenge/screens/mural_screen/stores/poststore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
+import 'package:rflutter_alert/rflutter_alert.dart';
 
 class MuralScreen extends StatefulWidget {
   @override
@@ -20,10 +21,9 @@ class _MuralScreenState extends State<MuralScreen> {
     super.initState();
 
     muralStore.addPost(
-      Post(
-          user: User(
-              name: "Trinity Moss",
-              profilePicture: "assets/avatars/TrinityMoss.png"),
+      PostStore(
+          userName: "Trinity Moss",
+          profilePicture: "assets/avatars/TrinityMoss.png",
           date: DateTime.now(),
           likedBy: "Mr. Thomas Neo",
           likes: 8,
@@ -34,10 +34,9 @@ class _MuralScreenState extends State<MuralScreen> {
     );
 
     muralStore.addPost(
-      Post(
-          user: User(
-              name: "Paulo Bertoldi",
-              profilePicture: "assets/avatars/PauloBertoldi.png"),
+      PostStore(
+          userName: "Paulo Bertoldi",
+          profilePicture: "assets/avatars/PauloBertoldi.png",
           date: DateTime.now().subtract(Duration(minutes: 45)),
           likedBy: "Alice Carvalho",
           likes: 2,
@@ -48,10 +47,9 @@ class _MuralScreenState extends State<MuralScreen> {
     );
 
     muralStore.addPost(
-      Post(
-        user: User(
-            name: "Alessandra Oliveira",
-            profilePicture: "assets/avatars/AlessandraOliveira.png"),
+      PostStore(
+        userName: "Alessandra Oliveira",
+        profilePicture: "assets/avatars/AlessandraOliveira.png",
         date: DateTime.now().subtract(Duration(minutes: 90)),
         likedBy: "Paulo Bertoldi",
         likes: 55,
@@ -62,11 +60,11 @@ class _MuralScreenState extends State<MuralScreen> {
         imageUrl: "assets/images/gatinho.jpg",
       ),
     );
+
     muralStore.addPost(
-      Post(
-        user: User(
-            name: "Letícia Santos",
-            profilePicture: "assets/avatars/LetíciaSantos.png"),
+      PostStore(
+        userName: "Letícia Santos",
+        profilePicture: "assets/avatars/LetíciaSantos.png",
         date: DateTime.now().subtract(Duration(minutes: 153)),
         likedBy: "Ilgner Ilgnei",
         likes: 6,
@@ -78,9 +76,9 @@ class _MuralScreenState extends State<MuralScreen> {
     );
 
     muralStore.addPost(
-      Post(
-        user: User(
-            name: "Kimiko Ohi", profilePicture: "assets/avatars/KimikoOhi.png"),
+      PostStore(
+        userName: "Kimiko Ohi",
+        profilePicture: "assets/avatars/KimikoOhi.png",
         date: DateTime.now().subtract(Duration(minutes: 265)),
         likedBy: "Antônio Boticarlos",
         likes: 7,
@@ -92,11 +90,10 @@ class _MuralScreenState extends State<MuralScreen> {
     );
 
     muralStore.addPost(
-      Post(
-        user: User(
-            name: "Rogério Santana",
-            profilePicture: "assets/avatars/RogérioSantana.png"),
-        date: DateTime.now().subtract(Duration(minutes: 323)),
+      PostStore(
+        userName: "Rogério Santana",
+        profilePicture: "assets/avatars/RogérioSantana.png",
+        date: DateTime.now().subtract(Duration(hours: 26)),
         likedBy: "Kimiko Ohi",
         likes: 65,
         shares: 12,
@@ -125,6 +122,58 @@ class _MuralScreenState extends State<MuralScreen> {
         elevation: 0,
       ),
       backgroundColor: Colors.grey[100],
+      floatingActionButton: FloatingActionButton(
+        backgroundColor: Theme.of(context).primaryColor,
+        child: Icon(MdiIcons.feather),
+        onPressed: () {
+          Alert(
+              context: context,
+              style: AlertStyle(
+                titleStyle: TextStyle(
+                  fontFamily:
+                      Theme.of(context).primaryTextTheme.bodyText1.fontFamily,
+                  color: Colors.black,
+                  fontSize: 14,
+                ),
+              ),
+              title: "Digite abaixo para postar",
+              content: TextField(
+                keyboardType: TextInputType.multiline,
+                textCapitalization: TextCapitalization.sentences,
+                decoration: InputDecoration(
+                  hintText: "O que está acontecendo?",
+                ),
+                maxLength: 280,
+                maxLengthEnforced: true,
+                minLines: 1,
+                maxLines: 5,
+              ),
+              buttons: [
+                DialogButton(
+                  onPressed: () {
+                    muralStore.inserPost(PostStore(
+                        userName: "Ma Jake",
+                        profilePicture: "assets/avatars/avatar.jpg",
+                        date: DateTime.now(),
+                        text: "texto",
+                        likes: 0,
+                        shares: 0,
+                        comments: 0,
+                        likedBy: "ninguém"));
+                    Navigator.pop(context);
+                  },
+                  color: Theme.of(context).primaryColor,
+                  child: Text(
+                    "POSTAR",
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                )
+              ]).show();
+        },
+      ),
       body: Container(
         width: double.infinity,
         height: double.infinity,
@@ -143,7 +192,7 @@ class _MuralScreenState extends State<MuralScreen> {
     );
   }
 
-  Widget postCard(Post post) {
+  Widget postCard(PostStore post) {
     var postAge = DateTime.now().difference(post.date);
     return Container(
       width: double.infinity,
@@ -174,7 +223,7 @@ class _MuralScreenState extends State<MuralScreen> {
                     left: 10, right: 10, top: 25, bottom: 25),
                 child: CircleAvatar(
                   radius: 30,
-                  backgroundImage: AssetImage(post.user.profilePicture),
+                  backgroundImage: AssetImage(post.profilePicture),
                 ),
               ),
             ],
@@ -186,16 +235,18 @@ class _MuralScreenState extends State<MuralScreen> {
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
-                  Text(
-                    "${post.likedBy} e outros ${post.likes} curtiram",
-                    style: TextStyle(fontSize: 12, color: Colors.grey[600]),
-                  ),
+                  Observer(builder: (_) {
+                    return Text(
+                      "${post.likedBy} e outros ${post.likes} curtiram",
+                      style: TextStyle(fontSize: 12, color: Colors.grey[600]),
+                    );
+                  }),
                   Padding(
                     padding: const EdgeInsets.only(top: 2, bottom: 2),
                     child: Row(
                       children: [
                         Text(
-                          "${post.user.name}",
+                          "${post.userName}",
                           style: TextStyle(
                             fontSize: 14,
                             fontWeight: FontWeight.bold,
@@ -236,7 +287,7 @@ class _MuralScreenState extends State<MuralScreen> {
                           child: Image.asset(
                             post.imageUrl,
                             width: double.infinity,
-                            height: 150,
+                            height: MediaQuery.of(context).size.width / 2.5,
                             fit: BoxFit.cover,
                             gaplessPlayback: true,
                           ),
@@ -254,8 +305,18 @@ class _MuralScreenState extends State<MuralScreen> {
                             MdiIcons.chatOutline, post.comments.toString()),
                         socialCounter(MdiIcons.shareVariantOutline,
                             post.shares.toString()),
-                        socialCounter(
-                            MdiIcons.heartOutline, post.likes.toString()),
+                        Observer(builder: (_) {
+                          return GestureDetector(
+                            onTap: post.likePost,
+                            child: socialCounter(
+                              post.wasLiked
+                                  ? MdiIcons.heart
+                                  : MdiIcons.heartOutline,
+                              post.likes.toString(),
+                              color: post.wasLiked ? Colors.red : Colors.grey,
+                            ),
+                          );
+                        }),
                       ],
                     ),
                   )
@@ -268,13 +329,14 @@ class _MuralScreenState extends State<MuralScreen> {
     );
   }
 
-  Widget socialCounter(IconData icon, String value) {
+  Widget socialCounter(IconData icon, String value,
+      {Color color = Colors.grey}) {
     return Row(
       children: [
         Icon(
           icon,
           size: 15,
-          color: Colors.grey,
+          color: color,
         ),
         SizedBox(
           width: 10,

@@ -37,6 +37,8 @@ dependencies:
 
   material_design_icons_flutter: ^4.0.5045
 
+  rflutter_alert: ^1.1.0
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
