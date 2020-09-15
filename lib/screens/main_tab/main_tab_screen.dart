@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'package:boti_challenge/screens/home/home_screen.dart';
+import 'package:boti_challenge/screens/mural_screen/mural_screen.dart';
 import 'package:flutter/material.dart';
 
 class MainTabScreen extends StatefulWidget {
@@ -22,7 +23,7 @@ class _MainTabScreenState extends State<MainTabScreen>
   List<Widget> loadTabChildren() {
     return [
       HomeScreen(),
-      Container(),
+      MuralScreen(),
       Container(),
     ];
   }
