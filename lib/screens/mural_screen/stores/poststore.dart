@@ -8,8 +8,7 @@ abstract class _PostStoreBase with Store {
   String profilePicture;
   DateTime date;
   String imageUrl;
-  int shares;
-  int comments;
+
   String likedBy;
 
   _PostStoreBase({
@@ -31,7 +30,19 @@ abstract class _PostStoreBase with Store {
   int likes = 0;
 
   @observable
+  int shares = 0;
+
+  @observable
+  int comments = 0;
+
+  @observable
   bool wasLiked = false;
+
+  @observable
+  bool wasShared = false;
+
+  @observable
+  bool wasCommented = false;
 
   @action
   void likePost() {
@@ -41,5 +52,25 @@ abstract class _PostStoreBase with Store {
       likes++;
     }
     wasLiked = !wasLiked;
+  }
+
+  @action
+  void sharePost() {
+    if (wasShared) {
+      shares--;
+    } else {
+      shares++;
+    }
+    wasShared = !wasShared;
+  }
+
+  @action
+  void commentPost() {
+    if (wasCommented) {
+      comments--;
+    } else {
+      comments++;
+    }
+    wasCommented = !wasCommented;
   }
 }

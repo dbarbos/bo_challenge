@@ -39,6 +39,36 @@ mixin _$PostStore on _PostStoreBase, Store {
     });
   }
 
+  final _$sharesAtom = Atom(name: '_PostStoreBase.shares');
+
+  @override
+  int get shares {
+    _$sharesAtom.reportRead();
+    return super.shares;
+  }
+
+  @override
+  set shares(int value) {
+    _$sharesAtom.reportWrite(value, super.shares, () {
+      super.shares = value;
+    });
+  }
+
+  final _$commentsAtom = Atom(name: '_PostStoreBase.comments');
+
+  @override
+  int get comments {
+    _$commentsAtom.reportRead();
+    return super.comments;
+  }
+
+  @override
+  set comments(int value) {
+    _$commentsAtom.reportWrite(value, super.comments, () {
+      super.comments = value;
+    });
+  }
+
   final _$wasLikedAtom = Atom(name: '_PostStoreBase.wasLiked');
 
   @override
@@ -51,6 +81,36 @@ mixin _$PostStore on _PostStoreBase, Store {
   set wasLiked(bool value) {
     _$wasLikedAtom.reportWrite(value, super.wasLiked, () {
       super.wasLiked = value;
+    });
+  }
+
+  final _$wasSharedAtom = Atom(name: '_PostStoreBase.wasShared');
+
+  @override
+  bool get wasShared {
+    _$wasSharedAtom.reportRead();
+    return super.wasShared;
+  }
+
+  @override
+  set wasShared(bool value) {
+    _$wasSharedAtom.reportWrite(value, super.wasShared, () {
+      super.wasShared = value;
+    });
+  }
+
+  final _$wasCommentedAtom = Atom(name: '_PostStoreBase.wasCommented');
+
+  @override
+  bool get wasCommented {
+    _$wasCommentedAtom.reportRead();
+    return super.wasCommented;
+  }
+
+  @override
+  set wasCommented(bool value) {
+    _$wasCommentedAtom.reportWrite(value, super.wasCommented, () {
+      super.wasCommented = value;
     });
   }
 
@@ -69,11 +129,37 @@ mixin _$PostStore on _PostStoreBase, Store {
   }
 
   @override
+  void sharePost() {
+    final _$actionInfo = _$_PostStoreBaseActionController.startAction(
+        name: '_PostStoreBase.sharePost');
+    try {
+      return super.sharePost();
+    } finally {
+      _$_PostStoreBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  void commentPost() {
+    final _$actionInfo = _$_PostStoreBaseActionController.startAction(
+        name: '_PostStoreBase.commentPost');
+    try {
+      return super.commentPost();
+    } finally {
+      _$_PostStoreBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   String toString() {
     return '''
 text: ${text},
 likes: ${likes},
-wasLiked: ${wasLiked}
+shares: ${shares},
+comments: ${comments},
+wasLiked: ${wasLiked},
+wasShared: ${wasShared},
+wasCommented: ${wasCommented}
     ''';
   }
 }

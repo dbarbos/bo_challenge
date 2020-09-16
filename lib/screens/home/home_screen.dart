@@ -27,20 +27,6 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(
-          "Novidades",
-          style: TextStyle(
-            color: Colors.black,
-          ),
-        ),
-        brightness: Brightness.light,
-        iconTheme: IconThemeData(
-          color: Theme.of(context).primaryColor,
-        ),
-        backgroundColor: Colors.transparent,
-        elevation: 0,
-      ),
       body: Container(
         width: double.infinity,
         height: double.infinity,
@@ -87,7 +73,7 @@ class _HomeScreenState extends State<HomeScreen> {
       },
       child: Container(
         width: double.infinity,
-        height: 300,
+        height: MediaQuery.of(context).size.width * 0.8,
         padding: const EdgeInsets.only(left: 15, right: 15, top: 15),
         child: Container(
           decoration: BoxDecoration(
@@ -101,14 +87,14 @@ class _HomeScreenState extends State<HomeScreen> {
                 child: Image.network(
                   "https://source.unsplash.com/300x30$index/?nature,animals,people",
                   width: double.infinity,
-                  height: 300,
+                  height: MediaQuery.of(context).size.width * 0.8,
                   fit: BoxFit.cover,
                   gaplessPlayback: true,
                 ),
               ),
               Container(
                 width: double.infinity,
-                height: 300,
+                height: MediaQuery.of(context).size.width * 0.8,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(8),
                   gradient: LinearGradient(

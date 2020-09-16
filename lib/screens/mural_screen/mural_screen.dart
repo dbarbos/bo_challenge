@@ -1,4 +1,3 @@
-import 'package:adaptive_dialog/adaptive_dialog.dart';
 import 'package:boti_challenge/screens/mural_screen/stores/muralstore.dart';
 import 'package:boti_challenge/screens/mural_screen/stores/poststore.dart';
 import 'package:flutter/material.dart';
@@ -107,20 +106,6 @@ class _MuralScreenState extends State<MuralScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(
-          "Mural",
-          style: TextStyle(
-            color: Colors.black,
-          ),
-        ),
-        brightness: Brightness.light,
-        iconTheme: IconThemeData(
-          color: Theme.of(context).primaryColor,
-        ),
-        backgroundColor: Colors.transparent,
-        elevation: 0,
-      ),
       backgroundColor: Colors.grey[100],
       floatingActionButton: FloatingActionButton(
         backgroundColor: Theme.of(context).primaryColor,
@@ -147,19 +132,24 @@ class _MuralScreenState extends State<MuralScreen> {
                 maxLengthEnforced: true,
                 minLines: 1,
                 maxLines: 5,
+                onChanged: muralStore.changeNewPost,
               ),
               buttons: [
                 DialogButton(
                   onPressed: () {
-                    muralStore.inserPost(PostStore(
-                        userName: "Ma Jake",
-                        profilePicture: "assets/avatars/avatar.jpg",
-                        date: DateTime.now(),
-                        text: "texto",
-                        likes: 0,
-                        shares: 0,
-                        comments: 0,
-                        likedBy: "ninguém"));
+                    if (muralStore.isNewPostValid) {
+                      muralStore.inserPost(PostStore(
+                          userName: "Ma Jake",
+                          profilePicture: "assets/avatars/avatar.jpg",
+                          date: DateTime.now(),
+                          text: muralStore.newPostText,
+                          likes: 0,
+                          shares: 0,
+                          comments: 0,
+                          likedBy: "ninguém"));
+                      muralStore.changeNewPost("");
+                    }
+
                     Navigator.pop(context);
                   },
                   color: Theme.of(context).primaryColor,
@@ -210,12 +200,13 @@ class _MuralScreenState extends State<MuralScreen> {
                 width: 80,
                 padding: const EdgeInsets.only(right: 10, top: 10),
                 child: Align(
-                    alignment: Alignment.topRight,
-                    child: Icon(
-                      MdiIcons.heart,
-                      color: Colors.grey,
-                      size: 15,
-                    )),
+                  alignment: Alignment.topRight,
+                  child: Icon(
+                    MdiIcons.heart,
+                    color: Colors.grey,
+                    size: 15,
+                  ),
+                ),
               ),
               Container(
                 width: 80,
@@ -237,7 +228,9 @@ class _MuralScreenState extends State<MuralScreen> {
                 children: [
                   Observer(builder: (_) {
                     return Text(
-                      "${post.likedBy} e outros ${post.likes} curtiram",
+                      post.likedBy == "ninguém"
+                          ? "${post.likes} curtidas"
+                          : "${post.likedBy} e outros ${post.likes} curtiram",
                       style: TextStyle(fontSize: 12, color: Colors.grey[600]),
                     );
                   }),
@@ -252,31 +245,277 @@ class _MuralScreenState extends State<MuralScreen> {
                             fontWeight: FontWeight.bold,
                           ),
                         ),
-                        Expanded(
-                          child: Text(
-                            postAge.inMinutes > 60
-                                ? postAge.inHours > 24
-                                    ? "${postAge.inDays} d"
-                                    : "${postAge.inHours} h"
-                                : "${postAge.inMinutes} m",
-                            textAlign: TextAlign.right,
-                            style: TextStyle(
-                              fontSize: 14,
-                              fontWeight: FontWeight.normal,
-                              color: Colors.grey,
-                            ),
+                        Text(
+                          postAge.inMinutes > 60
+                              ? postAge.inHours > 24
+                                  ? " · ${postAge.inDays} d"
+                                  : " · ${postAge.inHours} h"
+                              : " · ${postAge.inMinutes} min",
+                          textAlign: TextAlign.right,
+                          style: TextStyle(
+                            fontSize: 14,
+                            fontWeight: FontWeight.normal,
+                            color: Colors.grey,
                           ),
                         ),
+                        Expanded(
+                          child: Align(
+                            alignment: Alignment.centerRight,
+                            child: GestureDetector(
+                              onTap: () {
+                                if (post.userName == "Ma Jake") {
+                                  showModalBottomSheet(
+                                      context: context,
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius:
+                                            BorderRadius.circular(10.0),
+                                      ),
+                                      builder: (context) {
+                                        return SafeArea(
+                                          child: ListView(
+                                            shrinkWrap: true,
+                                            children: [
+                                              ListTile(
+                                                onTap: () {
+                                                  muralStore.removePost(post);
+                                                  Navigator.pop(context);
+                                                },
+                                                leading: Icon(
+                                                  MdiIcons.trashCanOutline,
+                                                  color: Colors.red,
+                                                ),
+                                                title: Text(
+                                                  "Excluir",
+                                                  style: TextStyle(
+                                                      color: Colors.red),
+                                                ),
+                                              ),
+                                              ListTile(
+                                                onTap: () {
+                                                  muralStore.newPostText = "";
+
+                                                  Alert(
+                                                      context: context,
+                                                      style: AlertStyle(
+                                                        titleStyle: TextStyle(
+                                                          fontFamily: Theme.of(
+                                                                  context)
+                                                              .primaryTextTheme
+                                                              .bodyText1
+                                                              .fontFamily,
+                                                          color: Colors.black,
+                                                          fontSize: 14,
+                                                        ),
+                                                      ),
+                                                      title:
+                                                          "Edite o texto abaixo",
+                                                      content: TextField(
+                                                        controller:
+                                                            TextEditingController()
+                                                              ..text =
+                                                                  post.text,
+                                                        keyboardType:
+                                                            TextInputType
+                                                                .multiline,
+                                                        textCapitalization:
+                                                            TextCapitalization
+                                                                .sentences,
+                                                        decoration:
+                                                            InputDecoration(
+                                                          hintText:
+                                                              "O que está acontecendo?",
+                                                        ),
+                                                        maxLength: 280,
+                                                        maxLengthEnforced: true,
+                                                        minLines: 1,
+                                                        maxLines: 5,
+                                                        onChanged: muralStore
+                                                            .changeNewPost,
+                                                      ),
+                                                      buttons: [
+                                                        DialogButton(
+                                                          onPressed: () {
+                                                            post.text =
+                                                                muralStore
+                                                                    .newPostText;
+                                                            Navigator.pop(
+                                                                context);
+                                                            Navigator.pop(
+                                                                context);
+                                                          },
+                                                          color:
+                                                              Theme.of(context)
+                                                                  .primaryColor,
+                                                          child: Text(
+                                                            "SALVAR",
+                                                            style: TextStyle(
+                                                              color:
+                                                                  Colors.white,
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .bold,
+                                                            ),
+                                                          ),
+                                                        )
+                                                      ]).show();
+                                                },
+                                                leading: Icon(
+                                                  MdiIcons.pencil,
+                                                  color: Colors.grey[600],
+                                                ),
+                                                title: Text(
+                                                  "Editar",
+                                                  style: TextStyle(
+                                                      color: Colors.grey[600]),
+                                                ),
+                                              ),
+                                              Padding(
+                                                padding:
+                                                    const EdgeInsets.all(8.0),
+                                                child: RaisedButton(
+                                                  onPressed: () {
+                                                    Navigator.pop(context);
+                                                  },
+                                                  elevation: 0,
+                                                  highlightElevation: 0,
+                                                  color: Colors.grey[500],
+                                                  shape: RoundedRectangleBorder(
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            15),
+                                                  ),
+                                                  child: Text(
+                                                    "Cancelar",
+                                                    style: TextStyle(
+                                                      fontWeight:
+                                                          FontWeight.bold,
+                                                      color: Colors.white,
+                                                    ),
+                                                  ),
+                                                ),
+                                              )
+                                            ],
+                                          ),
+                                        );
+                                      });
+                                } else {
+                                  showModalBottomSheet(
+                                      context: context,
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius:
+                                            BorderRadius.circular(10.0),
+                                      ),
+                                      builder: (context) {
+                                        return SafeArea(
+                                          child: ListView(
+                                            shrinkWrap: true,
+                                            children: [
+                                              ListTile(
+                                                onTap: () {
+                                                  Navigator.pop(context);
+                                                },
+                                                leading: Icon(
+                                                  MdiIcons.accountRemoveOutline,
+                                                  color: Colors.grey[600],
+                                                ),
+                                                title: Text(
+                                                  "Deixar de segui ${post.userName}",
+                                                  style: TextStyle(
+                                                      color: Colors.grey[600]),
+                                                ),
+                                              ),
+                                              ListTile(
+                                                onTap: () {
+                                                  Navigator.pop(context);
+                                                },
+                                                leading: Icon(
+                                                  MdiIcons.volumeMute,
+                                                  color: Colors.grey[600],
+                                                ),
+                                                title: Text(
+                                                  "Silenciar ${post.userName}",
+                                                  style: TextStyle(
+                                                      color: Colors.grey[600]),
+                                                ),
+                                              ),
+                                              ListTile(
+                                                onTap: () {
+                                                  Navigator.pop(context);
+                                                },
+                                                leading: Icon(
+                                                  MdiIcons.cancel,
+                                                  color: Colors.grey[600],
+                                                ),
+                                                title: Text(
+                                                  "Bloquear ${post.userName}",
+                                                  style: TextStyle(
+                                                      color: Colors.grey[600]),
+                                                ),
+                                              ),
+                                              ListTile(
+                                                onTap: () {
+                                                  Navigator.pop(context);
+                                                },
+                                                leading: Icon(
+                                                  MdiIcons.flagOutline,
+                                                  color: Colors.grey[600],
+                                                ),
+                                                title: Text(
+                                                  "Denunciar Mensagem",
+                                                  style: TextStyle(
+                                                      color: Colors.grey[600]),
+                                                ),
+                                              ),
+                                              Padding(
+                                                padding:
+                                                    const EdgeInsets.all(8.0),
+                                                child: RaisedButton(
+                                                  onPressed: () {
+                                                    Navigator.pop(context);
+                                                  },
+                                                  elevation: 0,
+                                                  highlightElevation: 0,
+                                                  color: Colors.grey[500],
+                                                  shape: RoundedRectangleBorder(
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            15),
+                                                  ),
+                                                  child: Text(
+                                                    "Cancelar",
+                                                    style: TextStyle(
+                                                      fontWeight:
+                                                          FontWeight.bold,
+                                                      color: Colors.white,
+                                                    ),
+                                                  ),
+                                                ),
+                                              )
+                                            ],
+                                          ),
+                                        );
+                                      });
+                                }
+                              },
+                              child: Icon(
+                                MdiIcons.chevronDown,
+                                color: Colors.grey,
+                              ),
+                            ),
+                          ),
+                        )
                       ],
                     ),
                   ),
-                  Text(
-                    "${post.text}",
-                    style: TextStyle(
-                      fontSize: 14,
-                      fontWeight: FontWeight.normal,
-                    ),
-                  ),
+                  Observer(builder: (_) {
+                    return Text(
+                      "${post.text}",
+                      style: TextStyle(
+                        fontSize: 14,
+                        fontWeight: FontWeight.normal,
+                      ),
+                    );
+                  }),
                   SizedBox(
                     height: 10,
                   ),
@@ -301,10 +540,33 @@ class _MuralScreenState extends State<MuralScreen> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
-                        socialCounter(
-                            MdiIcons.chatOutline, post.comments.toString()),
-                        socialCounter(MdiIcons.shareVariantOutline,
-                            post.shares.toString()),
+                        Observer(
+                          builder: (_) {
+                            return GestureDetector(
+                              onTap: post.commentPost,
+                              child: socialCounter(
+                                post.wasCommented
+                                    ? MdiIcons.chat
+                                    : MdiIcons.chatOutline,
+                                post.comments.toString(),
+                                color: post.wasCommented
+                                    ? Colors.blue
+                                    : Colors.grey,
+                              ),
+                            );
+                          },
+                        ),
+                        Observer(builder: (_) {
+                          return GestureDetector(
+                            onTap: post.sharePost,
+                            child: socialCounter(
+                              MdiIcons.repeat,
+                              post.shares.toString(),
+                              color:
+                                  post.wasShared ? Colors.green : Colors.grey,
+                            ),
+                          );
+                        }),
                         Observer(builder: (_) {
                           return GestureDetector(
                             onTap: post.likePost,
@@ -343,7 +605,7 @@ class _MuralScreenState extends State<MuralScreen> {
         ),
         Text(
           value,
-          style: TextStyle(color: Colors.grey),
+          style: TextStyle(color: color),
         ),
       ],
     );

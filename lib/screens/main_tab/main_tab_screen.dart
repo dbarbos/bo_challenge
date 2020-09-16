@@ -2,6 +2,7 @@ import 'dart:async';
 import 'package:boti_challenge/screens/home/home_screen.dart';
 import 'package:boti_challenge/screens/mural_screen/mural_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 class MainTabScreen extends StatefulWidget {
   @override
@@ -90,9 +91,12 @@ class _MainTabScreenState extends State<MainTabScreen>
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: getCurrentTabScreen(),
-      bottomNavigationBar: bottomTabBar(),
+    return AnnotatedRegion<SystemUiOverlayStyle>(
+      value: SystemUiOverlayStyle(statusBarBrightness: Brightness.light),
+      child: Scaffold(
+        body: getCurrentTabScreen(),
+        bottomNavigationBar: bottomTabBar(),
+      ),
     );
   }
 
