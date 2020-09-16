@@ -1,3 +1,4 @@
+import 'package:boti_challenge/screens/login/login_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -188,45 +189,45 @@ class _AboutScreenState extends State<AboutScreen> {
                     children: projects(),
                   ),
                 ),
-                SizedBox(
-                  height: 25,
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Row(
-                    children: [
-                      Text(
-                        "STACK EXPERIENCE",
-                        textAlign: TextAlign.left,
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                      Expanded(
-                        child: Align(
-                          alignment: Alignment.centerRight,
-                          child: Icon(
-                            MdiIcons.robot,
-                            color: Colors.lightBlue[500],
-                          ),
-                        ),
-                      )
-                    ],
-                  ),
-                ),
-                MediaQuery.removePadding(
-                  context: context,
-                  removeTop: true,
-                  child: GridView.count(
-                    physics: NeverScrollableScrollPhysics(),
-                    childAspectRatio: 1.2,
-                    reverse: false,
-                    shrinkWrap: true,
-                    crossAxisCount: 4,
-                    children: techStack(),
-                  ),
-                ),
+                // SizedBox(
+                //   height: 25,
+                // ),
+                // Padding(
+                //   padding: const EdgeInsets.all(8.0),
+                //   child: Row(
+                //     children: [
+                //       Text(
+                //         "STACK EXPERIENCE",
+                //         textAlign: TextAlign.left,
+                //         style: TextStyle(
+                //           color: Colors.white,
+                //           fontWeight: FontWeight.bold,
+                //         ),
+                //       ),
+                //       Expanded(
+                //         child: Align(
+                //           alignment: Alignment.centerRight,
+                //           child: Icon(
+                //             MdiIcons.robot,
+                //             color: Colors.lightBlue[500],
+                //           ),
+                //         ),
+                //       )
+                //     ],
+                //   ),
+                // ),
+                // MediaQuery.removePadding(
+                //   context: context,
+                //   removeTop: true,
+                //   child: GridView.count(
+                //     physics: NeverScrollableScrollPhysics(),
+                //     childAspectRatio: 1.2,
+                //     reverse: false,
+                //     shrinkWrap: true,
+                //     crossAxisCount: 4,
+                //     children: techStack(),
+                //   ),
+                // ),
                 SizedBox(
                   height: 25,
                 ),
@@ -271,6 +272,34 @@ class _AboutScreenState extends State<AboutScreen> {
                 //     ],
                 //   ),
                 // )
+                Container(
+                  width: double.infinity,
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: RaisedButton(
+                      onPressed: () {
+                        Navigator.of(context).pushReplacement(
+                            MaterialPageRoute(builder: (_) => LoginScreen()));
+                      },
+                      elevation: 0,
+                      highlightElevation: 0,
+                      color: Colors.red,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(15),
+                      ),
+                      child: Text(
+                        "SAIR",
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white,
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+                SizedBox(
+                  height: 25,
+                ),
               ],
             ),
           ],
