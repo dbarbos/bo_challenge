@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'package:boti_challenge/screens/about/about_screen.dart';
 import 'package:boti_challenge/screens/home/home_screen.dart';
 import 'package:boti_challenge/screens/mural_screen/mural_screen.dart';
 import 'package:flutter/material.dart';
@@ -25,7 +26,7 @@ class _MainTabScreenState extends State<MainTabScreen>
     return [
       HomeScreen(),
       MuralScreen(),
-      Container(),
+      AboutScreen(),
     ];
   }
 
