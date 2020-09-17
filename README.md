@@ -94,7 +94,7 @@ flutter upgrade
 Para baixar e atualizar as dependências use o comando
 
 ```sh
-flutter upgrade
+flutter pub get
 ```
 
 <!-- Building -->
