@@ -22,6 +22,13 @@ class _MainTabScreenState extends State<MainTabScreen>
 
   bool hasOpenOrders = false;
 
+  @override
+  void setState(fn) {
+    if (mounted) {
+      super.setState(fn);
+    }
+  }
+
   List<Widget> loadTabChildren() {
     return [
       HomeScreen(),
