@@ -17,6 +17,7 @@
 *** for contributors-url, forks-url, etc. This is an optional, concise syntax you may use.
 *** https://www.markdownguide.org/basic-syntax/#reference-style-links
 -->
+[![Codemagic build status](https://api.codemagic.io/apps/5f62be89448c7081a182d3db/5f62be89448c7081a182d3da/status_badge.svg)](https://codemagic.io/apps/5f62be89448c7081a182d3db/5f62be89448c7081a182d3da/latest_build)
 [![MIT License][license-shield]][license-url]
 [![LinkedIn][linkedin-shield]][linkedin-url]
 
