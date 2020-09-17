@@ -1,191 +1,149 @@
-<!--
-*** Thanks for checking out this README Template. If you have a suggestion that would
-*** make this better, please fork the repo and create a pull request or simply open
-*** an issue with the tag "enhancement".
-*** Thanks again! Now go create something AMAZING! :D
--->
-
-
-
-
-
-<!-- PROJECT SHIELDS -->
-<!--
-*** I'm using markdown "reference style" links for readability.
-*** Reference links are enclosed in brackets [ ] instead of parentheses ( ).
-*** See the bottom of this document for the declaration of the reference variables
-*** for contributors-url, forks-url, etc. This is an optional, concise syntax you may use.
-*** https://www.markdownguide.org/basic-syntax/#reference-style-links
--->
 [![Codemagic build status](https://api.codemagic.io/apps/5f62be89448c7081a182d3db/5f62be89448c7081a182d3da/status_badge.svg)](https://codemagic.io/apps/5f62be89448c7081a182d3db/5f62be89448c7081a182d3da/latest_build)
 [![MIT License][license-shield]][license-url]
 [![LinkedIn][linkedin-shield]][linkedin-url]
 
-
-
 <!-- PROJECT LOGO -->
 <br />
 <p align="center">
-  <a href="https://github.com/othneildrew/Best-README-Template">
-    <img src="images/logo.png" alt="Logo" width="80" height="80">
-  </a>
+  <img src="assets/icons/bo_icon.png" alt="Logo" width="80" height="80">
 
-  <h3 align="center">Best-README-Template</h3>
+  <h3 align="center">Boti Challenge</h3>
 
   <p align="center">
-    An awesome README template to jumpstart your projects!
+    Um projeto de demonstração feito em Flutter com MobX
     <br />
-    <a href="https://github.com/othneildrew/Best-README-Template"><strong>Explore the docs »</strong></a>
-    <br />
-    <br />
-    <a href="https://github.com/othneildrew/Best-README-Template">View Demo</a>
-    ·
-    <a href="https://github.com/othneildrew/Best-README-Template/issues">Report Bug</a>
-    ·
-    <a href="https://github.com/othneildrew/Best-README-Template/issues">Request Feature</a>
+    
   </p>
 </p>
 
-
-
 <!-- TABLE OF CONTENTS -->
+
 ## Table of Contents
 
-* [About the Project](#about-the-project)
-  * [Built With](#built-with)
-* [Getting Started](#getting-started)
-  * [Prerequisites](#prerequisites)
-  * [Installation](#installation)
-* [Usage](#usage)
-* [Roadmap](#roadmap)
-* [Contributing](#contributing)
-* [License](#license)
-* [Contact](#contact)
-* [Acknowledgements](#acknowledgements)
-
-
+- [Sobre o Projeto](#about-the-project)
+  - [Desenvolvido Usando](#built-with)
+- [Começando](#getting-started)
+  - [Prerequisitos](#prerequisites)
+  - [Instalação](#installation)
+- [Resultado do build para Android](#getting-started)
+- [Resultado dos Testes](#getting-started)
+- [Baixe o APK](#getting-started)
+- [Para Contribuir](#contributing)
+- [Lisença](#license)
+- [Contato](#contact)
 
 <!-- ABOUT THE PROJECT -->
-## About The Project
 
-[![Product Name Screen Shot][product-screenshot]](https://example.com)
+## Sobre o Projeto
 
-There are many great README templates available on GitHub, however, I didn't find one that really suit my needs so I created this enhanced one. I want to create a README template so amazing that it'll be the last one you ever need.
+<div style="width:100%">
+  <img src="assets/images/login_screen.png" alt="LoginScreen" style="width:30%">
+  <img src="assets/images/news_screen.png" alt="NewsScreen" style="width:30%">
+  <img src="assets/images/mural_screen.png" alt="MuralScreen" style="width:30%">
+</div>
 
-Here's why:
-* Your time should be focused on creating something amazing. A project that solves a problem and helps others
-* You shouldn't be doing the same tasks over and over like creating a README from scratch
-* You should element DRY principles to the rest of your life :smile:
+</br>
 
-Of course, no one template will serve all projects since your needs may be different. So I'll be adding more in the near future. You may also suggest changes by forking this repo and creating a pull request or opening an issue.
+O objetivo deste projeto é apresentar uma aplicação construida em Flutter com a finalidade de apresentar um tipo de blog corporativo onde é possível acessar as novidades sobre a empresa através de uma tela de "novidades" que busca os dados por uma API. Além disse existe também um mural, com design baseado no app do Twitter, onde é possível ver o que os colegas de empresa estão falando, curtir e compartilhar suas próprias ideias.
 
-A list of commonly used resources that I find helpful are listed in the acknowledgements.
+Aqui estão todas as funcionalidades:
 
-### Built With
-This section should list any major frameworks that you built your project using. Leave any add-ons/plugins for the acknowledgements section. Here are a few examples.
-* [Bootstrap](https://getbootstrap.com)
-* [JQuery](https://jquery.com)
-* [Laravel](https://laravel.com)
+- Formulário de login que valida o e-mail e a senha digitados antes de liberar a entrada
+- Tela para criar conta que valida o nome, email e passwor antes de permitir a criação. Após isso faz o login automaticamente
+- Tela de novidades que busca os dados da API https://gb-mobile-app-teste.s3.amazonaws.com/data.json e os apresenta em uma lista. (Obs.: As imagens apresentadas são na verdade de um serviço de imagens terceiro, já que as imagens da API sugeridas não estão funcionando)
+- Tela de mural para ver mensagens dos colegas e postar novas mensagens
+- Tela sobre os detalhes do desenvolvedor
 
+As ações na aplicação são mockadas para demonstrar o funcionamento.
 
+### Construído Com
+
+Nesta parte eu listo quais foram os principais frameworks e serviços utilizados para construir o App.
+
+- [Flutter](https://flutter.dev)
+- [Pub.dev](https://pub.dev)
+- [MobX](https://mobx.netlify.app)
 
 <!-- GETTING STARTED -->
-## Getting Started
 
-This is an example of how you may give instructions on setting up your project locally.
-To get a local copy up and running follow these simple example steps.
+## Começando
 
-### Prerequisites
+Após clonar o repositório você precisa verificar alguns detalhes para garantir que tudo rode normalmente. Para clonar o projeto use o comando.
 
-This is an example of how to list things you need to use the software and how to install them.
-* npm
 ```sh
-npm install npm@latest -g
+git clone https://github.com/dbarbos/bo_challenge.git
 ```
 
-### Installation
+### Prerequisitos
 
-1. Get a free API Key at [https://example.com](https://example.com)
-2. Clone the repo
+Verifique se você está usando a versão estável do Flutter stable.
+
+Para isso use o seguinte comando para ver qual o canal atual
+
 ```sh
-git clone https://github.com/your_username_/Project-Name.git
+flutter channel
 ```
-3. Install NPM packages
+
+Para mudar para o canal stable use o comando para mudar o canal e em seguida faça o upgrade
+
 ```sh
-npm install
-```
-4. Enter your API in `config.js`
-```JS
-const API_KEY = 'ENTER YOUR API';
+flutter channel stable
+flutter upgrade
 ```
 
+Para baixar e atualizar as dependências use o comando
 
+```sh
+flutter upgrade
+```
 
-<!-- USAGE EXAMPLES -->
-## Usage
+<!-- Building -->
 
-Use this space to show useful examples of how a project can be used. Additional screenshots, code examples and demos work well in this space. You may also link to more resources.
+## Resultado do build para Android
 
-_For more examples, please refer to the [Documentation](https://example.com)_
+<img src="assets/images/codemagic.png" alt="Codemagic" style="width:100%">
 
+<!-- Testing -->
 
+## Resultado dos Testes
 
-<!-- ROADMAP -->
-## Roadmap
+<img src="assets/images/test_result.png" alt="Testes" style="width:100%">
 
-See the [open issues](https://github.com/othneildrew/Best-README-Template/issues) for a list of proposed features (and known issues).
+<!-- Baixe o APK -->
 
+## Baixe o APK
 
+Para testar o app diretamente no seu aparelho Android clique no link abaixo para baixar o APK
+
+<a href="https://github.com/dbarbos/bo_challenge/blob/master/APK/app-debug.apk">Baixe o APK</a>
 
 <!-- CONTRIBUTING -->
-## Contributing
 
-Contributions are what make the open source community such an amazing place to be learn, inspire, and create. Any contributions you make are **greatly appreciated**.
+## Para Contribuir
 
-1. Fork the Project
-2. Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to the Branch (`git push origin feature/AmazingFeature`)
-5. Open a Pull Request
+Para contribuir com esse projeto basta seguir os passos:
 
-
+1. Faça um fork do projeto
+2. Crie uma branch (`git checkout -b feature/AmazingFeature`)
+3. Faça um commit das suas mudanças (`git commit -m 'Add some AmazingFeature'`)
+4. Faça um Push da branch (`git push origin feature/AmazingFeature`)
+5. Faça Pull Request
 
 <!-- LICENSE -->
-## License
+
+## Lisença
 
 Distributed under the MIT License. See `LICENSE` for more information.
 
-
-
 <!-- CONTACT -->
-## Contact
 
-Your Name - [@your_twitter](https://twitter.com/your_username) - email@example.com
+## Contato
 
-Project Link: [https://github.com/your_username/repo_name](https://github.com/your_username/repo_name)
-
-
-
-<!-- ACKNOWLEDGEMENTS -->
-## Acknowledgements
-* [GitHub Emoji Cheat Sheet](https://www.webpagefx.com/tools/emoji-cheat-sheet)
-* [Img Shields](https://shields.io)
-* [Choose an Open Source License](https://choosealicense.com)
-* [GitHub Pages](https://pages.github.com)
-* [Animate.css](https://daneden.github.io/animate.css)
-* [Loaders.css](https://connoratherton.com/loaders)
-* [Slick Carousel](https://kenwheeler.github.io/slick)
-* [Smooth Scroll](https://github.com/cferdinandi/smooth-scroll)
-* [Sticky Kit](http://leafo.net/sticky-kit)
-* [JVectorMap](http://jvectormap.com)
-* [Font Awesome](https://fontawesome.com)
-
-
-
-
+Dilermando Barbosa Jr - dilermando.barbosa@gmail.com
 
 <!-- MARKDOWN LINKS & IMAGES -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
+
 [contributors-shield]: https://img.shields.io/github/contributors/othneildrew/Best-README-Template.svg?style=flat-square
 [contributors-url]: https://github.com/othneildrew/Best-README-Template/graphs/contributors
 [forks-shield]: https://img.shields.io/github/forks/othneildrew/Best-README-Template.svg?style=flat-square
