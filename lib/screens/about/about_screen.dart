@@ -28,7 +28,7 @@ class _AboutScreenState extends State<AboutScreen> {
         elevation: 0,
       ),
       extendBodyBehindAppBar: true,
-      backgroundColor: Colors.black87,
+      backgroundColor: Colors.grey[200],
       body: SingleChildScrollView(
         child: Stack(
           children: [
@@ -57,7 +57,15 @@ class _AboutScreenState extends State<AboutScreen> {
                   child: Container(
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(8),
-                        color: Colors.grey[850]),
+                        color: Colors.grey[100],
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.grey.withOpacity(0.5),
+                            spreadRadius: 5,
+                            blurRadius: 7,
+                            offset: Offset(0, 3), // changes position of shadow
+                          ),
+                        ]),
                     child: Column(
                       children: [
                         Padding(
@@ -68,7 +76,7 @@ class _AboutScreenState extends State<AboutScreen> {
                               Text(
                                 "DILER BARBOSA JR",
                                 style: TextStyle(
-                                  color: Colors.white,
+                                  color: Colors.black,
                                   fontWeight: FontWeight.bold,
                                 ),
                               ),
@@ -161,7 +169,7 @@ class _AboutScreenState extends State<AboutScreen> {
                         "PROJETOS EM DESTAQUE",
                         textAlign: TextAlign.left,
                         style: TextStyle(
-                          color: Colors.white,
+                          color: Colors.black,
                           fontWeight: FontWeight.bold,
                         ),
                       ),
@@ -170,7 +178,7 @@ class _AboutScreenState extends State<AboutScreen> {
                           alignment: Alignment.centerRight,
                           child: Icon(
                             MdiIcons.fileDocumentMultiple,
-                            color: Colors.lightBlue[500],
+                            color: Theme.of(context).primaryColor,
                           ),
                         ),
                       )
